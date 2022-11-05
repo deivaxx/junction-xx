@@ -8,6 +8,8 @@
     "start": "node dist/apps/index.js"
   },
   "dependencies": {
+    "@dataunions/client": "^3.0.6",
+    "streamr-client": "^6.0.10",
     "typescript": "4.8.4"
   },
   "keywords": [],
