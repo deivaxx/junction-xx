@@ -40,11 +40,11 @@ const main = async () => {
   await new UserDataUnionJoiner().join(user, RANDOM_SAMPLE_DATAUNION_ID);
 
   // bellow conversation happens when client has executed finder view and knows ALL available streams
-  const oneMessage = { streamDomain: "0x900000000000", streamPath: "music", payload: { "song": "pepito" } };
+  const oneMessage = { streamDomain: MUSIC_STREAM.domain, streamPath: MUSIC_STREAM.path, payload: { "song": "pepito" } };
   await new DataMessagePublisher(
     new StreamrDataMessagePublisher(userStreamrClient)
   ).execute(oneMessage);
-  const otherMessage = { streamDomain: "0x800000000000", streamPath: "location", payload: { "where": "in mollete" } };
+  const otherMessage = { streamDomain: LOCATION_STREAM.domain, streamPath: LOCATION_STREAM.path, payload: { "where": "in mollete" } };
   await new DataMessagePublisher(
     new StreamrDataMessagePublisher(userStreamrClient)
   ).execute(otherMessage);
