@@ -9,9 +9,10 @@ export class StreamrDataMessagePublisher {
 
   public async publish(dataMessage: DataMessage): Promise<void> {
     const stream = await new MockStreamRepository().find(dataMessage.streamCategory);
-    await this.userStreamrClient.publish(
+    const idk = await this.userStreamrClient.publish(
       stream.id,
       dataMessage.message,
     );
+    console.log("published eoeoeo: ", idk);
   }
 }

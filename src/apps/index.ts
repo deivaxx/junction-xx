@@ -26,16 +26,17 @@ const main = async () => {
   // just a sample demo actions
 
   // TODO: creator view
-  await adminStreamCreator.createManyAvailable();
+  // await adminStreamCreator.createManyAvailable();
 
   // TODO: joiner view & resolve when user has to be joined to data union
-  await new UserDataUnionJoiner().join(user, RANDOM_SAMPLE_DATAUNION_ID);
+  // await new UserDataUnionJoiner().join(user, RANDOM_SAMPLE_DATAUNION_ID);
 
   // bellow conversation happens when client has executed finder view and knows ALL available streams
   const oneMessage = new DataMessage(EStreamCategory.SOFT_MUSIC, { "song": "pepito" });
   await new StreamrDataMessagePublisher(userStreamrClient).publish(oneMessage)
   const otherMessage = new DataMessage(EStreamCategory.ACCURATE_LOCATION, { "where": "in mollete" });
   await new StreamrDataMessagePublisher(userStreamrClient).publish(otherMessage);
+  userStreamrClient.destroy();
 }
 
 main()
