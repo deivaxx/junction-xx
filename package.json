@@ -1,0 +1,16 @@
+{
+  "name": "xx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:only": "tsc -p tsconfig.json --pretty",
+    "start": "node dist/apps/index.js"
+  },
+  "dependencies": {
+    "typescript": "4.8.4"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
