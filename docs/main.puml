@@ -1,0 +1,27 @@
+@startuml
+class User {
+  + address: Address
+  + subscribe(stream: Stream): void
+  + unsubscribe(stream: Stream): void
+}
+class Stream {
+  + id: StreamIdentifier
+  + publish(message: any): void
+}
+class StreamIdentifier {
+  - domain: string
+  - path: string
+  + toString(): string
+}
+class DataUnion {
+  + addUser(user: User): void
+}
+User o--> Stream
+Stream *--> StreamIdentifier
+DataUnion o--> User
+@enduml
+
+// dentro de cada dataunion he de saber "cuanto de relevante" es la data de cada member --> share %
+
+// crear streams (backoffice)
+// user subscribe to streams (app)
