@@ -1,11 +1,8 @@
 import { StreamrDataMessagePublisher } from "../controllers/StreamrDataMessagePublisher";
 import { DataMessage } from "../domain/DataMessage";
-import { Stream } from "../domain/Stream";
-import { StreamIdentifier } from "../domain/StreamIdentifier";
 
 export interface DataMessageToPublish {
-  streamDomain: string;
-  streamPath: string;
+  streamId: string;
   payload: any;
 } 
 
@@ -18,9 +15,7 @@ export class DataMessagePublisher {
     message: DataMessageToPublish,
   ): Promise<void> {
     const dataMessage = new DataMessage(
-      new Stream(
-        new StreamIdentifier(message.streamDomain, message.streamPath),
-      ),
+      message.streamId,
       message.payload,
     );
     await this.publisher.publish(dataMessage);

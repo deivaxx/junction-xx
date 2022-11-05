@@ -1,11 +1,10 @@
-import { Stream } from "../domain/Stream";
 
 export class StreamFinder {
   constructor(
-    private streams: Stream[],
+    private streamIds: string[],
   ) {}
 
-  public async findAll(): Promise<Stream[]> {
-    return Promise.resolve(this.streams.slice());
+  public async findAll(): Promise<string[]> {
+    return Promise.resolve(this.streamIds.slice());
   }
 }

@@ -8,7 +8,7 @@ export class StreamrDataMessagePublisher {
 
   public async publish(dataMessage: DataMessage): Promise<void> {
     await this.userStreamrClient.publish(
-      dataMessage.getStreamId(),
+      dataMessage.streamId,
       dataMessage.message,
     );
   }
