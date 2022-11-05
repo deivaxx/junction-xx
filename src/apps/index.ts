@@ -47,7 +47,7 @@ const main = async () => {
   const otherMessage = { streamDomain: "0x800000000000", streamPath: "location", payload: { "where": "in mollete" } };
   await new DataMessagePublisher(
     new StreamrDataMessagePublisher(userStreamrClient)
-  ).execute(oneMessage);
+  ).execute(otherMessage);
 }
 
 
