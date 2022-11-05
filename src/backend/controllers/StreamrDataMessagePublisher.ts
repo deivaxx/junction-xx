@@ -1,5 +1,6 @@
 import StreamrClient from "streamr-client";
 import { DataMessage } from "../domain/DataMessage";
+import { MockStreamRepository } from "../infrastructure/MockStreamRepository";
 
 export class StreamrDataMessagePublisher {
   constructor(
@@ -7,8 +8,9 @@ export class StreamrDataMessagePublisher {
   ) {}
 
   public async publish(dataMessage: DataMessage): Promise<void> {
+    const stream = await new MockStreamRepository().find(dataMessage.streamCategory);
     await this.userStreamrClient.publish(
-      dataMessage.streamId,
+      stream.id,
       dataMessage.message,
     );
   }
