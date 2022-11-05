@@ -5,8 +5,8 @@ import { AdminStreamCreator } from "../backend/controllers/AdminStreamCreator";
 import { StreamrDataMessagePublisher } from "../backend/controllers/StreamrDataMessagePublisher";
 import { UserDataUnionJoiner } from "../backend/controllers/UserDataUnionJoiner";
 import { Address } from "../backend/domain/Address";
+import { DataMessage } from "../backend/domain/DataMessage";
 import { User } from "../backend/domain/User";
-import { DataMessagePublisher } from "../backend/views/DataMessagePublisher";
 
 const user = new User(
   new Address("0x000000000001")  
@@ -33,14 +33,10 @@ const main = async () => {
   await new UserDataUnionJoiner().join(user, RANDOM_SAMPLE_DATAUNION_ID);
 
   // bellow conversation happens when client has executed finder view and knows ALL available streams
-  const oneMessage = { streamId: MUSIC_STREAM_ID, payload: { "song": "pepito" } };
-  await new DataMessagePublisher(
-    new StreamrDataMessagePublisher(userStreamrClient)
-  ).execute(oneMessage);
-  const otherMessage = { streamId: LOCATION_STREAM_ID, payload: { "where": "in mollete" } };
-  await new DataMessagePublisher(
-    new StreamrDataMessagePublisher(userStreamrClient)
-  ).execute(otherMessage);
+  const oneMessage = new DataMessage(MUSIC_STREAM_ID, { "song": "pepito" });
+  await new StreamrDataMessagePublisher(userStreamrClient).publish(oneMessage)
+  const otherMessage = new DataMessage(LOCATION_STREAM_ID, { "where": "in mollete" });
+  await new StreamrDataMessagePublisher(userStreamrClient).publish(otherMessage);
 }
 
 
