@@ -2,7 +2,7 @@ import { Address } from "./Address";
 
 export class User {
   constructor(
-    public readonly address: Address,
+    private readonly address: Address,
   ) {
   }
 

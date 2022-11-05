@@ -1,18 +1,17 @@
-import StreamrClient from "streamr-client";
 import { DataMessage } from "../domain/DataMessage";
+import { User } from "../domain/User";
 import { MockStreamRepository } from "../infrastructure/MockStreamRepository";
+import { StreamrClientSingleton } from "../infrastructure/StreamrClientSignleton";
 
 export class StreamrDataMessagePublisher {
-  constructor(
-    private readonly userStreamrClient: StreamrClient,
-  ) {}
-
   public async publish(dataMessage: DataMessage): Promise<void> {
+    const streamrClient = StreamrClientSingleton.getInstance(dataMessage.owner);
     const stream = await new MockStreamRepository().find(dataMessage.streamCategory);
-    const idk = await this.userStreamrClient.publish(
+    const message = await streamrClient.publish(
       stream.id,
       dataMessage.message,
     );
-    console.log("published eoeoeo: ", idk);
+    // TODO: remove console.log
+    console.log("message published: ", message);
   }
 }
